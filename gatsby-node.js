@@ -146,6 +146,22 @@ exports.createSchemaCustomization = async ({ actions }) => {
       content: [HomepageFeature]
     }
 
+    interface HowItWorksStep implements Node & HomepageBlock {
+      id: ID!
+      blocktype: String
+      heading: String
+      text: String
+      index: String
+      image: HomepageImage
+    }
+
+    interface HowItWorks implements Node & HomepageBlock {
+      id: ID!
+      blocktype: String
+      heading: String
+      content: [HowItWorksStep]
+    }
+
     interface HomepageCta implements Node & HomepageBlock {
       id: ID!
       blocktype: String
@@ -397,6 +413,22 @@ exports.createSchemaCustomization = async ({ actions }) => {
       text: String
       image: HomepageImage @link(from: "image___NODE")
       links: [HomepageLink] @link(from: "links___NODE")
+    }
+
+    type ContentfulHowItWorks implements Node & HomepageBlock & HowItWorks
+      @dontInfer {
+      blocktype: String @blocktype
+      heading: String
+      content: [HowItWorksStep] @link(from: "content___NODE")
+    }
+
+    type ContentfulHowItWorksStep implements Node & HomepageBlock & HowItWorksStep
+      @dontInfer {
+      blocktype: String @blocktype
+      heading: String
+      text: String
+      index: String
+      image: HomepageImage @link(from: "image___NODE")
     }
 
     type ContentfulHomepageFeatureList implements Node & HomepageBlock & HomepageFeatureList

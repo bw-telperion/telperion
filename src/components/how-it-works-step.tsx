@@ -9,25 +9,25 @@ import {
   Subhead,
   Kicker,
   Text,
-  ButtonList,
   HomepageImage,
-  HomepageLink,
+  Heading,
 } from "./ui"
 
-export interface FeatureDataProps {
+export interface HowItWorksStepProps {
   id: string
   image?: HomepageImage
-  kicker?: string
+  index?: string
   heading: string
   text: string
-  links: HomepageLink[]
 }
 
-interface FeatureProps {
+interface HowItWorksProps {
   flip: boolean
 }
 
-export default function Feature(props: FeatureDataProps & FeatureProps) {
+export default function HowItWorksStep(
+  props: HowItWorksStepProps & HowItWorksProps
+) {
   return (
     <Section padding={4}>
       <Container>
@@ -39,14 +39,11 @@ export default function Feature(props: FeatureDataProps & FeatureProps) {
                 image={getImage(props.image.gatsbyImageData)}
               />
             )}
+            {props.index && <Heading as="H1">{props.index}</Heading>}
           </Box>
           <Box width="half">
-            <Subhead>
-              {props.kicker && <Kicker>{props.kicker}</Kicker>}
-              {props.heading}
-            </Subhead>
+            <Subhead>{props.heading}</Subhead>
             <Text variant="lead">{props.text}</Text>
-            <ButtonList links={props.links} />
           </Box>
         </Flex>
       </Container>
@@ -55,16 +52,11 @@ export default function Feature(props: FeatureDataProps & FeatureProps) {
 }
 
 export const query = graphql`
-  fragment HomepageFeatureContent on HomepageFeature {
+  fragment HowItWorksStepContent on HowItWorksStep {
     id
-    kicker
     heading
     text
-    links {
-      id
-      href
-      text
-    }
+    index
     image {
       id
       gatsbyImageData

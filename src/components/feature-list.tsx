@@ -13,14 +13,7 @@ export interface FeatureListProps {
 export default function FeatureList(props: FeatureListProps) {
   return (
     <Container width="fullbleed">
-      <Box background="muted" radius="large">
-        <Box center paddingY={5}>
-          <Heading>
-            {props.kicker && <Kicker>{props.kicker}</Kicker>}
-            {props.heading}
-          </Heading>
-          {props.text && <Text>{props.text}</Text>}
-        </Box>
+      <Box radius="large">
         {props.content.map((feature, i) => (
           <Feature key={feature.id} {...feature} flip={Boolean(i % 2)} />
         ))}
