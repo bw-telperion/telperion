@@ -1,6 +1,7 @@
 import { graphql } from "gatsby"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import * as React from "react"
+import { fullHeightSection, hero, heroWrapper, wrapper } from "./hero.css"
 import {
   Box,
   ButtonList,
@@ -26,17 +27,9 @@ export interface HeroProps {
 
 export default function Hero(props: HeroProps) {
   return (
-    <Section>
-      <Container>
+    <div className={fullHeightSection}>
+      <Container className={heroWrapper}>
         <Flex gap={4} variant="responsive">
-          <Box width="half">
-            {props.image && (
-              <GatsbyImage
-                alt={props.image.alt}
-                image={getImage(props.image.gatsbyImageData)}
-              />
-            )}
-          </Box>
           <Box width="half">
             <Heading as="h1">
               {props.kicker && <Kicker>{props.kicker}</Kicker>}
@@ -46,9 +39,10 @@ export default function Hero(props: HeroProps) {
             <Text as="p">{props.text}</Text>
             <ButtonList links={props.links} />
           </Box>
+          <Box width="half"></Box>
         </Flex>
       </Container>
-    </Section>
+    </div>
   )
 }
 

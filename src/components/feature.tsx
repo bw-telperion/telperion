@@ -13,6 +13,7 @@ import {
   HomepageImage,
   HomepageLink,
 } from "./ui"
+import { featureWrapper, fullHeightSection, imageStyle } from "./feature.css"
 
 export interface FeatureDataProps {
   id: string
@@ -25,32 +26,36 @@ export interface FeatureDataProps {
 
 interface FeatureProps {
   flip: boolean
+  className?: string
 }
 
 export default function Feature(props: FeatureDataProps & FeatureProps) {
   return (
-    <Section padding={4}>
-      <Container>
-        <Flex gap={4} variant="responsive">
-          <Box width="half" order={props.flip ? 1 : null}>
-            {props.image && (
-              <GatsbyImage
-                alt={props.image.alt}
-                image={getImage(props.image.gatsbyImageData)}
-              />
-            )}
-          </Box>
-          <Box width="half">
-            <Subhead>
-              {props.kicker && <Kicker>{props.kicker}</Kicker>}
-              {props.heading}
-            </Subhead>
-            <Text variant="lead">{props.text}</Text>
-            <ButtonList links={props.links} />
-          </Box>
-        </Flex>
-      </Container>
-    </Section>
+    <div className={fullHeightSection}>
+      <Section padding={4} className={props.className}>
+        <Container className={featureWrapper}>
+          <Flex gap={4} variant="responsive">
+            <Box width="half" order={props.flip ? 1 : null}>
+              {props.image && (
+                <GatsbyImage
+                  alt={props.image.alt}
+                  image={getImage(props.image.gatsbyImageData)}
+                  className={imageStyle}
+                />
+              )}
+            </Box>
+            <Box width="half">
+              <Subhead>
+                {props.kicker && <Kicker>{props.kicker}</Kicker>}
+                {props.heading}
+              </Subhead>
+              <Text variant="lead">{props.text}</Text>
+              <ButtonList links={props.links} reversed={!props.flip} />
+            </Box>
+          </Flex>
+        </Container>
+      </Section>
+    </div>
   )
 }
 

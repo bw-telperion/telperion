@@ -18,9 +18,13 @@ import {
   desktopHeaderNavWrapper,
   mobileHeaderNavWrapper,
   mobileNavSVGColorWrapper,
+  navWrapper,
+  navSolid,
+  navTransparent,
 } from "./header.css"
 import NavItemGroup, { NavItemGroupNavItem } from "./nav-item-group"
 import BrandLogo from "./brand-logo"
+import { useEffect } from "react"
 
 type NavItem = {
   id: string
@@ -89,8 +93,22 @@ export default function Header() {
 
   const { navItems, cta } = data.layout.header
   const [isOpen, setOpen] = React.useState(false)
+  const [hasScrolled, setHasScrolled] = React.useState(false)
 
-  React.useEffect(() => {
+  const handleScroll = () => {
+    const offset = window.scrollY
+    if (offset > 90) {
+      setHasScrolled(true)
+    } else {
+      setHasScrolled(false)
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll)
+  })
+
+  useEffect(() => {
     if (isOpen) {
       document.body.style.overflowY = "hidden"
     } else {
@@ -99,7 +117,11 @@ export default function Header() {
   }, [isOpen])
 
   return (
-    <header>
+    <header
+      className={[navWrapper, hasScrolled ? navSolid : navTransparent].join(
+        " "
+      )}
+    >
       <Container className={desktopHeaderNavWrapper}>
         <Space size={2} />
         <Flex variant="spaceBetween">

@@ -39,7 +39,7 @@ export default function HowItWorksStep(
                 image={getImage(props.image.gatsbyImageData)}
               />
             )}
-            {props.index && <Heading as="H1">{props.index}</Heading>}
+            {props.index && <Heading as="h1">{props.index}</Heading>}
           </Box>
           <Box width="half">
             <Subhead>{props.heading}</Subhead>

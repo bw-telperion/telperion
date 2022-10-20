@@ -2,6 +2,7 @@ import * as React from "react"
 import { graphql } from "gatsby"
 import { Container, Box, Kicker, Heading, Text } from "./ui"
 import Feature, { FeatureDataProps } from "./feature"
+import { flipped, regular } from "./feature-list.css"
 
 export interface FeatureListProps {
   kicker?: string
@@ -12,13 +13,16 @@ export interface FeatureListProps {
 
 export default function FeatureList(props: FeatureListProps) {
   return (
-    <Container width="fullbleed">
-      <Box radius="large">
-        {props.content.map((feature, i) => (
-          <Feature key={feature.id} {...feature} flip={Boolean(i % 2)} />
-        ))}
-      </Box>
-    </Container>
+    <>
+      {props.content.map((feature, i) => (
+        <Feature
+          key={feature.id}
+          {...feature}
+          flip={Boolean(i % 2)}
+          className={i % 2 ? flipped : regular}
+        />
+      ))}
+    </>
   )
 }
 
