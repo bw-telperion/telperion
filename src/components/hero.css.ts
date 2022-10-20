@@ -8,11 +8,11 @@ export const fullHeightSection = style({
     backgroundSize: "cover",
     backgroundPosition: "50% 50%",
     backgroundImage: "url(/images/hero-background.png)",
-    "@media": {
-        [media.large]: {
-            minHeight: "100vh",
-        },
-    },
+
+
+
+
+
 })
 
 export const heroWrapper = style({
